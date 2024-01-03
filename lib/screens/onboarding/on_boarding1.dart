@@ -242,13 +242,13 @@ class OnboardContent extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+              style:  TextStyle(fontSize: MediaQuery.sizeOf(context).width*0.07, fontWeight: FontWeight.bold),
             ),
             Text(
               title2,
-              style: const TextStyle(
-                  color: Color.fromRGBO(0, 128, 128, 1),
-                  fontSize: 34,
+              style: TextStyle(
+                  color: const Color.fromRGBO(0, 128, 128, 1),
+                  fontSize: MediaQuery.sizeOf(context).width*0.07,
                   fontWeight: FontWeight.bold),
             ),
           ],
@@ -259,8 +259,8 @@ class OnboardContent extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-              style: const TextStyle(
-                fontSize: 20,
+              style: TextStyle(
+                fontSize: MediaQuery.sizeOf(context).width*0.045,
               ),
               textAlign: TextAlign.center,
               description),

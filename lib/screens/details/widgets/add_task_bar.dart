@@ -168,7 +168,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       ),
       leading: IconButton(
           onPressed: () {
-            Get.back();
+            Get.back(result: '');
           },
           icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       title: const Text('Add Task'),
@@ -310,36 +310,41 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
 // Validate the title and insert the task into the database
   _validateTitle(categoryname) async {
-    if (categoryname == 'Personal') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
-        // Submit to Database for Personal Tasks
-        final taskData = PTasksDB(
-          taskTitle: _titleController.text,
-          isCompleted: 0,
-          date: DateFormat.yMd().format(_selectedDate),
-          startTime: _startTime,
-          endTime: _endTime,
-          color: _selectedColor,
-          remind: _selectedRemind,
-          repeat: _selectedRepeat,
-          count: 0,
-        );
-        await DBHelper.insertToPersonal(taskData);
-        Get.back();
-      } else {
-        // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
-            colorText: Colors.white,
-            backgroundColor: Colors.red,
-            icon: const Icon(
-              Icons.warning_amber_rounded,
-            ),
-            margin: const EdgeInsets.all(10),
-            forwardAnimationCurve: Curves.decelerate,
-            snackPosition: SnackPosition.BOTTOM);
-      }
-    } else if (categoryname == 'Work') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
+if (categoryname == 'Personal') {
+  if (_titleController.text.isNotEmpty &&
+      _titleController.text.trim().isNotEmpty) {
+    // Submit to Database for Personal Tasks
+    final taskData = PTasksDB(
+      taskTitle: _titleController.text.trim(),
+      isCompleted: 0,
+      date: DateFormat.yMd().format(_selectedDate),
+      startTime: _startTime,
+      endTime: _endTime,
+      color: _selectedColor,
+      remind: _selectedRemind,
+      repeat: _selectedRepeat,
+      count: 0,
+    );
+    await DBHelper.insertToPersonal(taskData);
+    Get.back(result: 'Task Added');
+  } else {
+    // Show a snack bar if title is empty or contains only whitespace
+    Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
+      colorText: Colors.white,
+      backgroundColor: Colors.red,
+      icon: const Icon(
+        Icons.warning_amber_rounded,
+      ),
+      margin: const EdgeInsets.all(10),
+      forwardAnimationCurve: Curves.decelerate,
+      snackPosition: SnackPosition.BOTTOM,
+    );
+  }
+ 
+
+}
+else if (categoryname == 'Work') {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Work Tasks
         final workData = WorkTasksDB(
           taskTitle: _titleController.text,
@@ -354,10 +359,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
         );
         await DBHelper.insertToWorkTask(workData);
 
-        Get.back();
+        Get.back(result: 'Success');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -367,8 +372,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
             forwardAnimationCurve: Curves.decelerate,
             snackPosition: SnackPosition.BOTTOM);
       }
+
     } else if (categoryname == 'Health') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Health Tasks
         final workData = HealthTasksDB(
           taskTitle: _titleController.text,
@@ -382,10 +388,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
           count: 0,
         );
         await DBHelper.insertToHealth(workData);
-        Get.back();
+        Get.back(result: 'Success');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -395,8 +401,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
             forwardAnimationCurve: Curves.decelerate,
             snackPosition: SnackPosition.BOTTOM);
       }
+
     } else if (categoryname == 'Social') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Social Tasks
         final workData = SocialTasksDB(
           taskTitle: _titleController.text,
@@ -410,10 +417,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
           count: 0,
         );
         await DBHelper.insertToSocial(workData);
-        Get.back();
+        Get.back(result: 'Success');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -423,8 +430,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
             forwardAnimationCurve: Curves.decelerate,
             snackPosition: SnackPosition.BOTTOM);
       }
+      
     } else if (categoryname == 'Technology') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Technology Tasks
         final workData = TechnologyTasksDB(
           taskTitle: _titleController.text,
@@ -438,10 +446,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
           count: 0,
         );
         await DBHelper.insertToTechnology(workData);
-        Get.back();
+        Get.back(result: 'Success');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -451,8 +459,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
             forwardAnimationCurve: Curves.decelerate,
             snackPosition: SnackPosition.BOTTOM);
       }
+      
     } else if (categoryname == 'Education') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Education Tasks
         final workData = EducationTasksDB(
           taskTitle: _titleController.text,
@@ -466,10 +475,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
           count: 0,
         );
         await DBHelper.insertToEducation(workData);
-        Get.back();
+        Get.back(result: 'Success');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -479,8 +488,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
             forwardAnimationCurve: Curves.decelerate,
             snackPosition: SnackPosition.BOTTOM);
       }
+      
     } else if (categoryname == 'Fashion') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Fashion Tasks
         final workData = FashionTasksDB(
           taskTitle: _titleController.text,
@@ -494,10 +504,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
           count: 0,
         );
         await DBHelper.insertToFashion(workData);
-        Get.back();
+        Get.back(result: 'Success');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -507,8 +517,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
             forwardAnimationCurve: Curves.decelerate,
             snackPosition: SnackPosition.BOTTOM);
       }
+      
     } else if (categoryname == 'Finance') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Finance Tasks
         final workData = FinanceTasksDB(
           taskTitle: _titleController.text,
@@ -522,10 +533,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
           count: 0,
         );
         await DBHelper.insertToFinance(workData);
-        Get.back();
+        Get.back(result: 'Success');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -535,8 +546,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
             forwardAnimationCurve: Curves.decelerate,
             snackPosition: SnackPosition.BOTTOM);
       }
+      
     } else if (categoryname == 'Travel') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Travel Tasks
         final workData = TravelTasksDB(
           taskTitle: _titleController.text,
@@ -550,10 +562,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
           count: 0,
         );
         await DBHelper.insertToTravel(workData);
-        Get.back();
+        Get.back(result: 'Success');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -563,8 +575,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
             forwardAnimationCurve: Curves.decelerate,
             snackPosition: SnackPosition.BOTTOM);
       }
+      
     } else if (categoryname == 'Food') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Food Tasks
         final workData = FoodTasksDB(
           taskTitle: _titleController.text,
@@ -578,10 +591,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
           count: 0,
         );
         await DBHelper.insertToFood(workData);
-        Get.back();
+        Get.back(result: 'Success');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -591,8 +604,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
             forwardAnimationCurve: Curves.decelerate,
             snackPosition: SnackPosition.BOTTOM);
       }
+      
     } else if (categoryname == 'Sports') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Sports Tasks
         final workData = SportsTasksDB(
           taskTitle: _titleController.text,
@@ -606,10 +620,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
           count: 0,
         );
         await DBHelper.insertToSports(workData);
-        Get.back();
+        Get.back(result: 'Success');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -619,8 +633,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
             forwardAnimationCurve: Curves.decelerate,
             snackPosition: SnackPosition.BOTTOM);
       }
+      
     } else if (categoryname == 'Home') {
-      if (_titleController.text.isNotEmpty || _titleController.text != ' ') {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Home Tasks
         final workData = HomeTasksDB(
           taskTitle: _titleController.text,
@@ -634,10 +649,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
           count: 0,
         );
         await DBHelper.insertToHome(workData);
-        Get.back();
+        Get.back(result: 'Success');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -647,6 +662,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
             forwardAnimationCurve: Curves.decelerate,
             snackPosition: SnackPosition.BOTTOM);
       }
+      
     }
   }
 }

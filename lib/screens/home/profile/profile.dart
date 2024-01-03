@@ -74,157 +74,164 @@ class _ProfileState extends State<Profile> {
                               ),
                             ],
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Stack(
-                                children: [
-                                   CircleAvatar(
-                                      backgroundImage:
-                                          profileList[0].imagex == 'null' ? null : FileImage(File(profileList[0].imagex!)) ,
-                                      radius: 60)
-                                ],
-                              ),
-                              
-                              const SizedBox(height: 10),
-                              
-                               Text(
-                                profileList[0].fullName == 'null' ? 'Full Name':profileList[0].fullName!,
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                profileList[0].eMail == 'null' ? 'Email Address' : profileList[0].eMail!,
-                                style: TextStyle(color: Colors.grey.shade600),
-                              ),
-                              const SizedBox(height: 20),
-                              
-                              // Name input field with validation
-                              TextField(
-                                readOnly: true,
-                                // keyboardType: TextInputType.name,
-                                controller: _nameController,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.grey.shade300,
-                                  hintText: profileList[0].fullName == 'null' ? 'Full Name' : profileList[0].fullName,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  prefixIcon: const Icon(Icons.person),
-                                  disabledBorder: InputBorder.none,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SizedBox(height: MediaQuery.sizeOf(context).height*0.03),
+                                Stack(
+                                  children: [
+                                     CircleAvatar(
+                                        backgroundImage:
+                                            profileList[0].imagex == 'null' ? null : FileImage(File(profileList[0].imagex!)) ,
+                                        radius: MediaQuery.sizeOf(context).height*0.06)
+                                  ],
                                 ),
-                              ),
-                              const SizedBox(height: 20),
-                              
-                              // Age input field with validation
-                              TextField(
-                                readOnly: true,
-                                keyboardType: TextInputType.number,
-                                controller: _ageController,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.grey.shade300,
-                                  hintText: profileList[0].eMail == 'null'? 'Email Address':profileList[0].eMail,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  prefixIcon: const Icon(CupertinoIcons.mail),
+                                
+                                const SizedBox(height: 10),
+                                
+                                 Text(
+                                  profileList[0].fullName == 'null' ? 'Full Name':profileList[0].fullName!,
+                                  style: const TextStyle(
+                                      fontSize: 20, fontWeight: FontWeight.bold),
                                 ),
-                              ),
-                              const SizedBox(height: 20),
-                              
-                              // PhoneNumber input field with validation
-                              TextField(
-                                readOnly: true,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.grey.shade300,
-                                  hintText: profileList[0].phoneNumber =='null' ? 'Phone Number' : profileList[0].phoneNumber,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  prefixIcon: const Icon(CupertinoIcons.phone),
+                                Text(
+                                  profileList[0].eMail == 'null' ? 'Email Address' : profileList[0].eMail!,
+                                  style: TextStyle(color: Colors.grey.shade600),
                                 ),
-                              ),
-                              const SizedBox(height: 20),
-                              
-                              // Mobile input field with validation
-                              TextField(
-                                readOnly: true,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.grey.shade300,
-                                  hintText: profileList[0].gender == 'null'? 'Gender' : profileList[0].gender,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(15),
+                                SizedBox(height: MediaQuery.sizeOf(context).height*0.02),
+                                
+                                // Name input field with validation
+                                TextField(
+                                  readOnly: true,
+                                  // keyboardType: TextInputType.name,
+                                  controller: _nameController,
+                                  decoration: InputDecoration(
+                                    constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height*0.1),
+                                    filled: true,
+                                    fillColor: Colors.grey.shade300,
+                                    hintText: profileList[0].fullName == 'null' ? 'Full Name' : profileList[0].fullName,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    prefixIcon: const Icon(Icons.person),
+                                    disabledBorder: InputBorder.none,
                                   ),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  prefixIcon: const Icon(
-                                      CupertinoIcons.person_crop_circle_fill),
                                 ),
-                              ),
-                              const SizedBox(height: 20),
-                              
-                              ElevatedButton(
-                                onPressed: () {
-                                  Get.to(()=>EditProfile(user:profileList));
-                                },
-                                style: ButtonStyle(
-                                  minimumSize:
-                                      const MaterialStatePropertyAll(Size(150, 40)),
-                                  maximumSize:
-                                      const MaterialStatePropertyAll(Size(180, 60)),
-                                  padding: const MaterialStatePropertyAll(
-                                      EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 15)),
-                                  backgroundColor:
-                                      const MaterialStatePropertyAll(Colors.black),
-                                  foregroundColor:
-                                      const MaterialStatePropertyAll(Colors.white),
-                                  shape: MaterialStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
+                                SizedBox(height: MediaQuery.sizeOf(context).height*0.02),
+                                
+                                // Age input field with validation
+                                TextField(
+                                  readOnly: true,
+                                  keyboardType: TextInputType.number,
+                                  controller: _ageController,
+                                  decoration: InputDecoration(
+                                    constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height*0.1),
+                                    filled: true,
+                                    fillColor: Colors.grey.shade300,
+                                    hintText: profileList[0].eMail == 'null'? 'Email Address':profileList[0].eMail,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    prefixIcon: const Icon(CupertinoIcons.mail),
+                                  ),
+                                ),
+                                SizedBox(height: MediaQuery.sizeOf(context).height*0.02),
+                                
+                                // PhoneNumber input field with validation
+                                TextField(
+                                  readOnly: true,
+                                  decoration: InputDecoration(
+                                    constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height*0.1),
+                                    filled: true,
+                                    fillColor: Colors.grey.shade300,
+                                    hintText: profileList[0].phoneNumber =='null' ? 'Phone Number' : profileList[0].phoneNumber,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    prefixIcon: const Icon(CupertinoIcons.phone),
+                                  ),
+                                ),
+                                SizedBox(height: MediaQuery.sizeOf(context).height*0.02),
+                                
+                                // Mobile input field with validation
+                                TextField(
+                                  readOnly: true,
+                                  decoration: InputDecoration(
+                                    constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height*0.1),
+                                    filled: true,
+                                    fillColor: Colors.grey.shade300,
+                                    hintText: profileList[0].gender == 'null'? 'Gender' : profileList[0].gender,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    prefixIcon: const Icon(
+                                        CupertinoIcons.person_crop_circle_fill),
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Get.to(()=>EditProfile(user:profileList));
+                                  },
+                                  style: ButtonStyle(
+                                    minimumSize:
+                                        const MaterialStatePropertyAll(Size(150, 40)),
+                                    maximumSize:
+                                        const MaterialStatePropertyAll(Size(180, 60)),
+                                    padding: const MaterialStatePropertyAll(
+                                        EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 15)),
+                                    backgroundColor:
+                                        const MaterialStatePropertyAll(Colors.black),
+                                    foregroundColor:
+                                        const MaterialStatePropertyAll(Colors.white),
+                                    shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
                                     ),
                                   ),
+                                  child: const Text('Edit Profile'),
                                 ),
-                                child: const Text('Edit Profile'),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TextButton(onPressed: (){
-                                    Get.to(()=>const TermsAndConditions());
-                                  },style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent),enableFeedback: true), child: const Text('Terms & Conditions',style: TextStyle(fontSize: 13),),),
-                                  TextButton(onPressed: (){
-                                    Get.to(()=>const PrivacyPolicy());
-                                  },style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent),enableFeedback: true),child: const Text('Privacy Policy',style: TextStyle(fontSize: 13)),)
-                                ],
-                              ),
-                              TextButton(onPressed: (){
-                                Get.to(()=> const AboutUs());
-                              },style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent),enableFeedback: true),child: const Text('About Us',style: TextStyle(fontSize: 13)),)
-                            ],
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    TextButton(onPressed: (){
+                                      Get.to(()=>const TermsAndConditions());
+                                    },style:  const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent),enableFeedback: true), child: const Text('Terms & Conditions',style: TextStyle(fontSize: 13),),),
+                                    TextButton(onPressed: (){
+                                      Get.to(()=>const PrivacyPolicy());
+                                    },style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent),enableFeedback: true),child: const Text('Privacy Policy',style: TextStyle(fontSize: 13)),)
+                                  ],
+                                ),
+                                TextButton(onPressed: (){
+                                  Get.to(()=> const AboutUs());
+                                },style: const ButtonStyle(overlayColor: MaterialStatePropertyAll(Colors.transparent),enableFeedback: true),child: const Text('About Us',style: TextStyle(fontSize: 13)),)
+                              ],
+                            ),
                           ),
                         ))
                   ],

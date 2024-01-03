@@ -208,7 +208,7 @@ class _EditProfileState extends State<EditProfile> {
                               // Age input field with validation
                               TextFormField(
                                 validator: (value) {
-                                  if (value != null &&
+                                  if (value != null && value.trim().isEmpty || value != null &&
                                       !value.contains('@gmail.com')) {
                                     return 'Please check your email address';
                                   }

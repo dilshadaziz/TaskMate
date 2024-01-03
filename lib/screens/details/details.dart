@@ -30,9 +30,7 @@ import 'package:taskmate/screens/details/widgets/search_tasks.dart';
 class Details extends StatefulWidget {
   final String categoryname;
 
-  const Details(
-      {required this.categoryname,
-      super.key});
+  const Details({required this.categoryname, super.key});
 
   @override
   State<Details> createState() => _DetailsState();
@@ -4375,13 +4373,32 @@ class _DetailsState extends State<Details> {
   _buildFloatingActionButton() {
     return FloatingActionButton(
       backgroundColor: Colors.black,
-      onPressed: () {
+      onPressed: () async {
         DBHelper.getPersonal();
-        Get.to(
+        dynamic result = await Get.to(
             () => AddTaskPage(
                   categoryname: widget.categoryname,
                 ),
             transition: Transition.size);
+        print(result);
+
+        if (result != '') {
+          if (result == null) {
+            return;
+          }
+          Get.snackbar(
+            result,
+            'Task added successfully!',
+            colorText: Colors.white,
+            backgroundColor: Colors.green,
+            icon: const Icon(
+              Icons.check_circle_outline,
+            ),
+            margin: const EdgeInsets.all(10),
+            forwardAnimationCurve: Curves.decelerate,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
       },
       child: const Icon(
         Icons.add,
@@ -4681,7 +4698,9 @@ class _DetailsState extends State<Details> {
           });
         },
         tabs: [
-          Tab(child: Marquee(text: 'Not Completed Tasks         '),),
+          Tab(
+            child: Marquee(text: 'Not Completed Tasks         '),
+          ),
           Tab(child: Marquee(text: 'Completed Tasks     ')),
         ],
       ),
@@ -4723,14 +4742,28 @@ class _DetailsState extends State<Details> {
                     children: [
                       Expanded(
                         child: ElevatedButton.icon(
-                          onPressed: () {
-                            Get.off(() => EditTask(
+                          onPressed: () async {
+                            dynamic result = await Get.off(() => EditTask(
                                 task: task,
                                 date: _selectedDate,
                                 categoryname: widget.categoryname));
-                            // setState(() {
-                            //     findPersonalTasks = dbTasksList.value;
-                            //   });
+                            if (result != '') {
+                              if (result == null) {
+                                return;
+                              }
+                              Get.snackbar(
+                                result,
+                                'Task updated successfully!',
+                                colorText: Colors.white,
+                                backgroundColor: Colors.green,
+                                icon: const Icon(
+                                  Icons.check_circle_outline,
+                                ),
+                                margin: const EdgeInsets.all(10),
+                                forwardAnimationCurve: Curves.decelerate,
+                                snackPosition: SnackPosition.BOTTOM,
+                              );
+                            }
                           },
                           icon: const Icon(Icons.edit_outlined),
                           label: const Text('Edit Task'),

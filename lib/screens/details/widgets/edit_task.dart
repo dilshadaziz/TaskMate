@@ -354,7 +354,7 @@ class _EditTaskState extends State<EditTask> {
 // Validate the title and update the task in the database
   _validateTitle(categoryname) async {
     if (categoryname == 'Personal') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Personal Tasks
         final taskData = PTasksDB(
             id: widget.task.id,
@@ -368,10 +368,10 @@ class _EditTaskState extends State<EditTask> {
             repeat: _selectedRepeat);
         await DBHelper.updatePersonalTask(taskData);
 
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -382,7 +382,7 @@ class _EditTaskState extends State<EditTask> {
             snackPosition: SnackPosition.BOTTOM);
       }
     } else if (categoryname == 'Work') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Work Tasks
         final workData = WorkTasksDB(
             id: widget.task.id,
@@ -396,10 +396,10 @@ class _EditTaskState extends State<EditTask> {
             repeat: _selectedRepeat);
         await DBHelper.updateWorkTask(workData);
 
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -410,7 +410,7 @@ class _EditTaskState extends State<EditTask> {
             snackPosition: SnackPosition.BOTTOM);
       }
     } else if (categoryname == 'Health') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Health Tasks
         final workData = HealthTasksDB(
             id: widget.task.id,
@@ -423,10 +423,10 @@ class _EditTaskState extends State<EditTask> {
             remind: _selectedRemind,
             repeat: _selectedRepeat);
         await DBHelper.updateHealthTask(workData);
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -437,7 +437,7 @@ class _EditTaskState extends State<EditTask> {
             snackPosition: SnackPosition.BOTTOM);
       }
     } else if (categoryname == 'Social') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Social Tasks
         final workData = SocialTasksDB(
             id: widget.task.id,
@@ -450,10 +450,10 @@ class _EditTaskState extends State<EditTask> {
             remind: _selectedRemind,
             repeat: _selectedRepeat);
         await DBHelper.updateSocialTask(workData);
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -464,7 +464,7 @@ class _EditTaskState extends State<EditTask> {
             snackPosition: SnackPosition.BOTTOM);
       }
     } else if (categoryname == 'Technology') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Technology Tasks
         final workData = TechnologyTasksDB(
             id: widget.task.id,
@@ -477,10 +477,10 @@ class _EditTaskState extends State<EditTask> {
             remind: _selectedRemind,
             repeat: _selectedRepeat);
         await DBHelper.updateTechnologyTask(workData);
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -491,7 +491,7 @@ class _EditTaskState extends State<EditTask> {
             snackPosition: SnackPosition.BOTTOM);
       }
     } else if (categoryname == 'Education') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Education Tasks
         final workData = EducationTasksDB(
             id: widget.task.id,
@@ -504,10 +504,10 @@ class _EditTaskState extends State<EditTask> {
             remind: _selectedRemind,
             repeat: _selectedRepeat);
         await DBHelper.updateEducationTask(workData);
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -518,7 +518,7 @@ class _EditTaskState extends State<EditTask> {
             snackPosition: SnackPosition.BOTTOM);
       }
     } else if (categoryname == 'Fashion') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Fashion Tasks
         final workData = FashionTasksDB(
             id: widget.task.id,
@@ -531,10 +531,10 @@ class _EditTaskState extends State<EditTask> {
             remind: _selectedRemind,
             repeat: _selectedRepeat);
         await DBHelper.updateFashionTask(workData);
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -545,7 +545,7 @@ class _EditTaskState extends State<EditTask> {
             snackPosition: SnackPosition.BOTTOM);
       }
     } else if (categoryname == 'Finance') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Finance Tasks
         final workData = FinanceTasksDB(
             id: widget.task.id,
@@ -558,10 +558,10 @@ class _EditTaskState extends State<EditTask> {
             remind: _selectedRemind,
             repeat: _selectedRepeat);
         await DBHelper.updateFinanceTask(workData);
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -572,7 +572,7 @@ class _EditTaskState extends State<EditTask> {
             snackPosition: SnackPosition.BOTTOM);
       }
     } else if (categoryname == 'Travel') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Travel Tasks
         final workData = TravelTasksDB(
             id: widget.task.id,
@@ -585,10 +585,10 @@ class _EditTaskState extends State<EditTask> {
             remind: _selectedRemind,
             repeat: _selectedRepeat);
         await DBHelper.updateTravelTask(workData);
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -599,7 +599,7 @@ class _EditTaskState extends State<EditTask> {
             snackPosition: SnackPosition.BOTTOM);
       }
     } else if (categoryname == 'Food') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Food Tasks
         final workData = FoodTasksDB(
             id: widget.task.id,
@@ -612,10 +612,10 @@ class _EditTaskState extends State<EditTask> {
             remind: _selectedRemind,
             repeat: _selectedRepeat);
         await DBHelper.updateFoodTask(workData);
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -626,7 +626,7 @@ class _EditTaskState extends State<EditTask> {
             snackPosition: SnackPosition.BOTTOM);
       }
     } else if (categoryname == 'Sports') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Sports Tasks
         final workData = SportsTasksDB(
             id: widget.task.id,
@@ -639,10 +639,10 @@ class _EditTaskState extends State<EditTask> {
             remind: _selectedRemind,
             repeat: _selectedRepeat);
         await DBHelper.updateSportsTask(workData);
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
@@ -653,7 +653,7 @@ class _EditTaskState extends State<EditTask> {
             snackPosition: SnackPosition.BOTTOM);
       }
     } else if (categoryname == 'Home') {
-      if (_titleController.text.isNotEmpty) {
+      if (_titleController.text.isNotEmpty && _titleController.text.trim().isNotEmpty) {
         // Submit to Database for Home Tasks
         final workData = HomeTasksDB(
             id: widget.task.id,
@@ -666,10 +666,10 @@ class _EditTaskState extends State<EditTask> {
             remind: _selectedRemind,
             repeat: _selectedRepeat);
         await DBHelper.updateHomeTask(workData);
-        Get.back();
+        Get.back(result: 'Task Updated');
       } else {
         // Show a snack bar if title is empty
-        Get.snackbar('Required', 'All Fields are Required !',
+        Get.snackbar('Required', 'Title cannot be empty or contain only whitespace!',
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(
