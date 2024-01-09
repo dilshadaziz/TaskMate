@@ -23,16 +23,19 @@ class _SearchState extends State<Search> {
   final tasksList =
       Category.generateCategories(); // List of category properties.
 
+      List<Category> result = [];
+
   @override
   void initState() {
     super.initState();
 
     // Initialize the findCategory list with all categories.
     findCategory = categoryList.value;
+    _runFilter('');
   }
 
   void _runFilter(String enteredKeyword) {
-    List<Category> result = [];
+    
 
     // Reset to the original list if the search is empty.
     if (enteredKeyword.isEmpty) {
@@ -73,7 +76,30 @@ class _SearchState extends State<Search> {
       ),
       body: SafeArea(
         // The main content area of the app.
-        child: ValueListenableBuilder<List<Category>>(
+        child: result.isEmpty ? SizedBox(
+                                                                    height: MediaQuery.of(context)
+                                                                            .size
+                                                                            .height /
+                                                                        1.4,
+                                                                    child: Center(
+                                                                        child: Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        SizedBox(
+                                                                            height: MediaQuery.sizeOf(context).height /
+                                                                                10,
+                                                                            child:
+                                                                                Icon(Icons.category_rounded,size: MediaQuery.sizeOf(context).width*0.2,)),
+                                                                        const Text(
+                                                                          'There is no such category matching with the entered keyword.',
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                        ),
+                                                                      ],
+                                                                    )),
+                                                                  ): ValueListenableBuilder<List<Category>>(
           valueListenable: categoryList,
           builder: (context, categoryListValue, child) => Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),

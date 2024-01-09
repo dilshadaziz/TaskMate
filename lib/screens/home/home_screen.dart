@@ -17,7 +17,7 @@ import 'package:taskmate/model/sports_task.dart';
 import 'package:taskmate/model/technology_task.dart';
 import 'package:taskmate/model/travel_task.dart';
 import 'package:taskmate/model/work_task.dart';
-import 'package:taskmate/screens/alltasksList.dart/all_tasks_list.dart';
+import 'package:taskmate/screens/alltasksList/all_tasks_list.dart';
 import 'package:taskmate/screens/details/details.dart';
 import 'package:taskmate/screens/home/profile/profile.dart';
 import 'package:taskmate/screens/home/widgets/categoryListpage.dart';

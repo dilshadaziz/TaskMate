@@ -45,12 +45,13 @@ class _SearchState extends State<SearchTasks> {
   List<SportsTasksDB> findSportsTasks = [];
   List<HomeTasksDB> findHomeTasks = [];
   List<AllTasksDB> findAllTasks = [];
+  dynamic emptyResult;
+  List<Object> result = [];
   @override
   void initState() {
     super.initState();
 
     // Initialize the findCategory list with all categories.
-
     findPersonalTasks = dbTasksList.value;
     findWorkTasks = dbWorksList.value;
     findHealthTasks = dbHealthList.value;
@@ -64,11 +65,12 @@ class _SearchState extends State<SearchTasks> {
     findSportsTasks = dbSportsList.value;
     findHomeTasks = dbHomeList.value;
     findAllTasks = dbAllTasksList.value;
+    _runFilter('');
+
   }
 
 // Method to filter tasks based on the entered keyword
   void _runFilter(String enteredKeyword) {
-    List<Object> result = [];
 
     // Reset to the original list if the search is empty.
     if (enteredKeyword.isEmpty) {
@@ -200,7 +202,7 @@ class _SearchState extends State<SearchTasks> {
             )
             .toList();
       }
-       else{
+       else if (widget.categoryname == 'AllTasks'){
         result = dbAllTasksList.value
             .where(
               (element) => element.taskTitle!.toLowerCase().contains(
@@ -248,8 +250,11 @@ class _SearchState extends State<SearchTasks> {
       // App Bar with a search input field.
       appBar: AppBar(
         title: TextField(
-          onChanged: (value) =>
-              _runFilter(value), // Handle text input changes for filtering.
+          onChanged: (value) {
+           emptyResult = emptyMessage();
+            return
+              _runFilter(value);
+              }, // Handle text input changes for filtering.
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(horizontal: 10),
             border: OutlineInputBorder(
@@ -261,7 +266,7 @@ class _SearchState extends State<SearchTasks> {
       ),
       body: SafeArea(
         // The main content area of the app.
-        child: ValueListenableBuilder<List<PTasksDB>>(
+        child: result.isEmpty ? emptyMessage():   ValueListenableBuilder<List<PTasksDB>>(
           valueListenable: dbTasksList,
           builder: (context, personalTasks, child) =>
 
@@ -3334,6 +3339,33 @@ _goToSpecifiedCategory(ctx,AllTasksDB findAllTaskItem){
     default:
   }
 }
+dynamic emptyMessage() {
+  print(widget.categoryname);
+    return SizedBox(
+                                                                    height: MediaQuery.of(context)
+                                                                            .size
+                                                                            .height /
+                                                                        1.4,
+                                                                    child: Center(
+                                                                        child: Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        SizedBox(
+                                                                            height: MediaQuery.sizeOf(context).height /
+                                                                                10,
+                                                                            child:
+                                                                                Image.asset('assets/images/clipboard.png')),
+                                                                        const Text(
+                                                                          'You do not have any tasks yet!\nAdd new tasks to make your days productive.',
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                        ),
+                                                                      ],
+                                                                    )),
+                                                                  );
+  } 
 }
 
 // Handle the deletion of a category.

@@ -71,105 +71,79 @@ class _OnBoardingState extends State<OnBoarding> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(12, 0, 12, 15),
-          child: Column(
-            children: [
-              Expanded(
-                child: PageView.builder(
-                  onPageChanged: (index) {
-                    setState(() {
-                      _pageIndex = index;
-                    });
-                  },
-                  itemCount: onBoardList.length,
-                  controller: _pageController,
-                  itemBuilder: (context, index) => OnboardContent(
-                    image: onBoardList[index].image,
-                    title: onBoardList[index].title,
-                    title2: onBoardList[index].title2 ?? '',
-                    description: onBoardList[index].description,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Expanded(
+                  child: PageView.builder(
+                    onPageChanged: (index) {
+                      setState(() {
+                        _pageIndex = index;
+                      });
+                    },
+                    itemCount: onBoardList.length,
+                    controller: _pageController,
+                    itemBuilder: (context, index) => OnboardContent(
+                      image: onBoardList[index].image,
+                      title: onBoardList[index].title,
+                      title2: onBoardList[index].title2 ?? '',
+                      description: onBoardList[index].description,
+                    ),
                   ),
                 ),
-              ),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ...List.generate(
-                          onBoardList.length,
-                          (index) => Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CircleNavigate(
-                                  isActive: index ==
-                                      _pageIndex, // Identify if the circle is active.
-                                ),
-                              )),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  _pageIndex == 0
-                      ? SizedBox(
-                          height: 60,
-                          width: MediaQuery.sizeOf(context).width / 1.1,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                
-                                _pageController.nextPage(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.ease);
-                              },
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      const MaterialStatePropertyAll(
-                                          Colors.black),
-                                  shape: MaterialStatePropertyAll(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)))),
-                              child: Text(onBoardList[0].button,
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.white))),
-                        )
-                      : _pageIndex == 1 || _pageIndex == 2
-                          ? SizedBox(
-                              height: 60,
-                              width: MediaQuery.sizeOf(context).width / 1.1,
-                              child: ElevatedButton(
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ...List.generate(
+                            onBoardList.length,
+                            (index) => Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CircleNavigate(
+                                    isActive: index ==
+                                        _pageIndex, // Identify if the circle is active.
+                                  ),
+                                )),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    _pageIndex == 0
+                        ? SizedBox(
+                            height: 60,
+                            width: MediaQuery.sizeOf(context).width / 1.1,
+                            child: ElevatedButton(
                                 onPressed: () {
                                   
                                   _pageController.nextPage(
-                                      duration:
-                                          const Duration(milliseconds: 300),
+                                      duration: const Duration(milliseconds: 300),
                                       curve: Curves.ease);
                                 },
                                 style: ButtonStyle(
-                                  backgroundColor:
-                                      const MaterialStatePropertyAll(
-                                          Colors.black),
-                                  shape: MaterialStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  ),
-                                ),
-                                child: Text(
-                                  onBoardList[1].button,
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.white),
-                                ),
-                              ),
-                            )
-                          : SizedBox(
-                              height: 60,
-                              width: MediaQuery.sizeOf(context).width / 1.1,
-                              child: GestureDetector(
+                                    backgroundColor:
+                                        const MaterialStatePropertyAll(
+                                            Colors.black),
+                                    shape: MaterialStatePropertyAll(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)))),
+                                child: Text(onBoardList[0].button,
+                                    style: const TextStyle(
+                                        fontSize: 20, color: Colors.white))),
+                          )
+                        : _pageIndex == 1 || _pageIndex == 2
+                            ? SizedBox(
+                                height: 60,
+                                width: MediaQuery.sizeOf(context).width / 1.1,
                                 child: ElevatedButton(
-                                  onPressed: () async {
+                                  onPressed: () {
                                     
-                                    await checkDefaultCategoryAdded(); // Check and add default categories.
-                                    checkLogin(); // Check and handle login.
+                                    _pageController.nextPage(
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                        curve: Curves.ease);
                                   },
                                   style: ButtonStyle(
                                     backgroundColor:
@@ -182,18 +156,46 @@ class _OnBoardingState extends State<OnBoarding> {
                                     ),
                                   ),
                                   child: Text(
-                                    onBoardList[3].button,
+                                    onBoardList[1].button,
                                     style: const TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
+                                        fontSize: 20, color: Colors.white),
+                                  ),
+                                ),
+                              )
+                            : SizedBox(
+                                height: 60,
+                                width: MediaQuery.sizeOf(context).width / 1.1,
+                                child: GestureDetector(
+                                  child: ElevatedButton(
+                                    onPressed: () async {
+                                      
+                                      await checkDefaultCategoryAdded(); // Check and add default categories.
+                                      checkLogin(); // Check and handle login.
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          const MaterialStatePropertyAll(
+                                              Colors.black),
+                                      shape: MaterialStatePropertyAll(
+                                        RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      onBoardList[3].button,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            )
-                ],
-              )
-            ],
+                              )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

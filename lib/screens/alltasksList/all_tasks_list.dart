@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:marquee/marquee.dart';
 import 'package:taskmate/constants/colors.dart';
 import 'package:taskmate/db/db_helper.dart';
 import 'package:taskmate/model/allTasks.dart';
@@ -389,9 +390,9 @@ class _AllTasksListState extends State<AllTasksList> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+               Text(
                 'All Category Tasks',
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: MediaQuery.sizeOf(context).width*0.05),
               ),
               const SizedBox(
                 height: 5,
@@ -441,8 +442,8 @@ class _AllTasksListState extends State<AllTasksList> {
           });
         },
         tabs: [
-          Tab(text: 'Not Completed Tasks'),
-          Tab(text: 'Completed Tasks'),
+          Tab(child: Marquee(text: 'Not Completed Tasks         ')),
+          Tab(child: Marquee(text: 'Completed Tasks       ')),
         ],
       ),
     );
