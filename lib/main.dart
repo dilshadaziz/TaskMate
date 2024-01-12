@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taskmate/db/db_helper.dart';
 import 'package:taskmate/screens/splash.dart';
 // import 'package:taskmate/services/notify_helper.dart';
