@@ -4653,7 +4653,7 @@ class _DetailsState extends State<Details> {
                         fontWeight: FontWeight.w500, fontSize: 20),
                   ),
                   const SizedBox(
-                    height: 5,
+                    height: 10,
                   ),
                   Text(
                     'You have $leftToday tasks for today!',
